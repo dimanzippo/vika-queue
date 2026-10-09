@@ -21,8 +21,8 @@ const conv = await vk("messages.getConversations", { filter: "unread", count: "2
 for (const it of conv?.response?.items || []) {
   const peer = it?.conversation?.peer?.id;
   const lm = it?.last_message;
-  if (!peer || !lm?.id) continue;
-  if (add({ id: `dm${peer}_${lm.id}`, kind: "message_new", peer, text: String(lm.text || "").slice(0, 300) })) added++;
+  if (!peer || !lm?.id || lm.out) continue;
+  if (add({ id: `dm${peer}_${lm.id}`, kind: "message_new", peer })) added++;
 }
 let cadded = 0;
 if (UT) {
@@ -32,7 +32,7 @@ if (UT) {
       const c = await vk("wall.getComments", { owner_id: "-242122575", post_id: p.id, count: "10" }, UT);
       for (const cm of c?.response?.items || []) {
         if (!cm?.id || cm.from_id < 0) continue;
-        if (add({ id: `wall${p.id}_${cm.id}`, kind: "wall_reply_new", peer: cm.from_id, text: String(cm.text || "").slice(0, 300) })) cadded++;
+        if (add({ id: `wall${p.id}_${cm.id}`, kind: "wall_reply_new", peer: cm.from_id })) cadded++;
       }
     }
   } catch (e) { console.error("wall: " + (e?.message || e)); }
