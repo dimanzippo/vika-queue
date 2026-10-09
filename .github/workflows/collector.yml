@@ -19,6 +19,6 @@ jobs:
       - run: |
           git config user.name "vika-collector"
           git config user.email "vika@local"
-          git add queue.json
+          git add queue.json seen.json
           git diff --cached --quiet || git commit -m "queue update"
           git push
