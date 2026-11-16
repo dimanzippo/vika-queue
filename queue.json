@@ -7,5 +7,14 @@
   "kind": "group_join",
   "peer": 781349458,
   "text": "новый участник группы"
+ },
+ {
+  "ts": "2026-11-16 19:41",
+  "status": "unread",
+  "src": "collector",
+  "id": "join537950277",
+  "kind": "group_join",
+  "peer": 537950277,
+  "text": "новый участник группы"
  }
 ]
